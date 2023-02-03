@@ -186,6 +186,75 @@ public class AliendroidNative {
     public static void SmallNativeAlien(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
     }
 
+    public static void SmallNativeAdmobRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup, String Hpk1,
+                                                 String Hpk2, String Hpk3, String Hpk4, String Hpk5) {
+
+
+    }
+
+    public static void SmallNativeMaxRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
+
+
+
+    }
+
+    public static void SmallNativeFanRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
+        nativeAdfan = new com.facebook.ads.NativeAd(activity, nativeId);
+        NativeAdListener nativeAdListener = new NativeAdListener() {
+            @Override
+            public void onMediaDownloaded(Ad ad) {
+                if (onLoadMediumNativesFacebook!=null){
+                    onLoadMediumNativesFacebook.onMediaDownloaded();
+                }
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                if (onLoadMediumNativesFacebook!=null){
+                    onLoadMediumNativesFacebook.onError("");
+                }
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                if (onLoadMediumNativesFacebook!=null){
+                    onLoadMediumNativesFacebook.onAdLoaded();
+                }
+                if (nativeAdfan == null || nativeAdfan != ad) {
+                    return;
+                }
+                inflateAd3(nativeAdfan, activity, layNative);
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        };
+
+        nativeAdfan.loadAd(
+                nativeAdfan.buildLoadAdConfig()
+                        .withAdListener(nativeAdListener)
+                        .build());
+    }
+
+
+    public static void SmallNativeAlienRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
+
+    }
+
+    //Rectangle
+    public static void SmallNativeStartAppRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
+
+    }
+
+
     public static void inflateAd(NativeBannerAd nativeBannerAd, Activity activity, RelativeLayout layNative) {
         try {
             nativeBannerAd.unregisterView();
@@ -228,6 +297,46 @@ public class AliendroidNative {
             nativeAdLayout = new NativeAdLayout(activity, null, 1);
             LayoutInflater inflater = LayoutInflater.from(activity);
             adView = (LinearLayout) inflater.inflate(R.layout.fan_medium_native, nativeAdLayout, false);
+            layNative.addView(adView);
+
+            LinearLayout adChoicesContainer = adView.findViewById(R.id.ad_choices_container);
+            AdOptionsView adOptionsView = new AdOptionsView(activity, nativeAdfan, nativeAdLayout);
+            adChoicesContainer.removeAllViews();
+            adChoicesContainer.addView(adOptionsView, 0);
+
+            com.facebook.ads.MediaView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
+            TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
+            com.facebook.ads.MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
+            TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
+            TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
+            TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
+            Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
+
+            nativeAdTitle.setText(nativeAdfan.getAdvertiserName());
+            nativeAdBody.setText(nativeAdfan.getAdBodyText());
+            nativeAdSocialContext.setText(nativeAdfan.getAdSocialContext());
+            nativeAdCallToAction.setVisibility(nativeAdfan.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
+            nativeAdCallToAction.setText(nativeAdfan.getAdCallToAction());
+            sponsoredLabel.setText(nativeAdfan.getSponsoredTranslation());
+
+            List<View> clickableViews = new ArrayList<>();
+            clickableViews.add(nativeAdTitle);
+            clickableViews.add(nativeAdCallToAction);
+
+            nativeAdfan.registerViewForInteraction(
+                    adView, nativeAdMedia, nativeAdIcon, clickableViews);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void inflateAd3(com.facebook.ads.NativeAd nativeAdfan, Activity activity, RelativeLayout layNative) {
+        try {
+            nativeAdfan.unregisterView();
+            nativeAdLayout = new NativeAdLayout(activity, null, 1);
+            LayoutInflater inflater = LayoutInflater.from(activity);
+            adView = (LinearLayout) inflater.inflate(R.layout.fan_small_rectangle_native, nativeAdLayout, false);
             layNative.addView(adView);
 
             LinearLayout adChoicesContainer = adView.findViewById(R.id.ad_choices_container);
