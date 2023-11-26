@@ -36,6 +36,7 @@ import com.aliendroid.sdkads.type.mediation.AlienMediationAds;
 import com.aliendroid.sdkads.type.view.AlienViewAds;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAdListener;
+import com.props.adsmanager.PropsAdsManagement;
 
 
 public class AliendroidIntertitial {
@@ -131,6 +132,9 @@ public class AliendroidIntertitial {
                 FBinterstitialAd.buildLoadAdConfig()
                         .withAdListener(interstitialAdListener)
                         .build());
+        if (selectAdsBackup.equals("ALIEN-M")){
+            AlienMediationAds.LoadInterstitial(activity, idIntertitialBackup);
+        }
     }
 
     public static void LoadIntertitialApplovinDis(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup
@@ -163,7 +167,7 @@ public class AliendroidIntertitial {
     }
 
     public static void LoadIntertitialAlienMediation(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup) {
-
+        AlienMediationAds.LoadInterstitial(activity, idIntertitial);
     }
 
     public static void ShowIntertitialAdmob(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup,
@@ -211,18 +215,22 @@ public class AliendroidIntertitial {
                                           int interval) {
         if (counter >= interval) {
             if (FBinterstitialAd == null || !FBinterstitialAd.isAdLoaded()) {
-                LoadIntertitialFAN(activity, selectAdsBackup, idIntertitial, idIntertitialBackup);
+                if (PropsAdsManagement.getInterstitialAds() != null) {
+                    PropsAdsManagement.getInterstitialAds().show(activity);
+                }
+
                 if (onShowInterstitialFacebook != null) {
                     onShowInterstitialFacebook.onAdFailedShow();
                 }
+
             } else {
                 FBinterstitialAd.show();
-                LoadIntertitialFAN(activity, selectAdsBackup, idIntertitial, idIntertitialBackup);
                 if (onShowInterstitialFacebook != null) {
                     onShowInterstitialFacebook.onAdSuccess();
                 }
             }
             counter = 0;
+            LoadIntertitialFAN(activity, selectAdsBackup, idIntertitial, idIntertitialBackup);
         } else {
             counter++;
         }
@@ -239,5 +247,19 @@ public class AliendroidIntertitial {
 
     public static void ShowIntertitialAlienMediation(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup,
                                                      int interval) {
+        if (counter >= interval) {
+            if (PropsAdsManagement.getInterstitialAds() != null) {
+                PropsAdsManagement.getInterstitialAds().show(activity);
+            } else {
+                if (FBinterstitialAd == null || !FBinterstitialAd.isAdLoaded()) {
+                } else {
+                    FBinterstitialAd.show();
+                }
+            }
+            LoadIntertitialAlienMediation(activity, selectAdsBackup, idIntertitial, idIntertitialBackup);
+            counter = 0;
+        } else {
+            counter++;
+        }
     }
 }

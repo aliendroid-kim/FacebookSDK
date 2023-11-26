@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.aliendroid.alienads.interfaces.banner.OnLoadBannerAdmob;
@@ -22,6 +23,12 @@ import com.aliendroid.sdkads.type.mediation.AlienMediationAds;
 import com.aliendroid.sdkads.type.view.AlienViewAds;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.props.adsmanager.PropsAdsManagement;
 
 
 public class AliendroidMediumBanner {
@@ -54,6 +61,13 @@ public class AliendroidMediumBanner {
             public void onError(Ad ad, AdError adError) {
                 if (onLoadBannerFacebook!=null){
                     onLoadBannerFacebook.onError();
+                }
+                if (selectAdsBackup.equals("ALIEN-M")){
+                    PropsAdsManagement propsAds = new PropsAdsManagement(activity);
+                    AdView adView = propsAds.createBannerAdview("MEDIUM_RECTANGLE", idBannerBackup);
+                    AdRequest adRequestProps = new AdRequest.Builder().build();
+                    layAds.addView(adView);
+                    adView.loadAd(adRequestProps);
                 }
             }
 
@@ -110,7 +124,21 @@ public class AliendroidMediumBanner {
     }
 
     public static void MediumBannerAlienMediation(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup) {
-
+        PropsAdsManagement propsAds = new PropsAdsManagement(activity);
+        AdView adView = propsAds.createBannerAdview("MEDIUM_RECTANGLE", idBanner);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        layAds.addView(adView);
+        adView.loadAd(adRequest);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                adViewFAN = new com.facebook.ads.AdView(activity, idBannerBackup,
+                        com.facebook.ads.AdSize.RECTANGLE_HEIGHT_250);
+                layAds.addView(adViewFAN);
+                adViewFAN.loadAd(adViewFAN.buildLoadAdConfig().build());
+                super.onAdFailedToLoad(loadAdError);
+            }
+        });
     }
 
 }

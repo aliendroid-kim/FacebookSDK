@@ -13,6 +13,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aliendroid.alienads.AlienNotif;
 import com.aliendroid.alienads.AlienOpenAds;
 import com.aliendroid.alienads.AliendroidInitialize;
 import com.aliendroid.alienads.interfaces.open.OnLoadOpenAppAdmob;
@@ -40,36 +41,17 @@ public class SplashActivity extends AppCompatActivity {
         Initilize for Alien Mediation Ads
          */
         InitializeAlienAds.LoadSDK();
-        AliendroidInitialize.SelectAdsApplovinMax(this,Select_Backup_Ads,Backup_Initialize);
+        AliendroidInitialize.SelectAdsAdmob(this,Select_Backup_Ads,Backup_Initialize);
         if (SettingsAlien.Select_Open_Ads.equals("1")){
+            AlienNotif.LoadOneSignal("535dc774-9fe3-44ae-839e-09e4133aebe9");
             AlienOpenAds.LoadOpenAds("ca-app-pub-3940256099942544/3419835294",true);
-            AlienOpenAds.onLoadOpenAppAdmob = new OnLoadOpenAppAdmob() {
+            AlienOpenAds.AppOpenAdManager.showAdIfAvailable(SplashActivity.this, new AlienOpenAds.OnShowAdCompleteListener() {
                 @Override
-                public void onAdLoaded() {
-                    AlienOpenAds.onShowOpenAppAdmob = new OnShowOpenAppAdmob() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                        }
-
-                        @Override
-                        public void onAdFailedToShowFullScreenContent() {
-
-                        }
-
-                        @Override
-                        public void onAdShowedFullScreenContent() {
-
-                        }
-                    };
-                }
-
-                @Override
-                public void onAdFailedToLoad() {
+                public void onShowAdComplete() {
                     startActivity(true);
                 }
-            };
+            });
+
         } else {
             startActivity(true);
         }
