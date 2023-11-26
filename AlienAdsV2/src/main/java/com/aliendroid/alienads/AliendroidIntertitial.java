@@ -265,4 +265,8 @@ public class AliendroidIntertitial {
     public static void LoadIntertitialWortise(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup) {
 
     }
+    public static void ShowIntertitialWortise(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup,
+                                              int interval) {
+
+    }
 }
