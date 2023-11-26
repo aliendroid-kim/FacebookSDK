@@ -89,4 +89,8 @@ public class AliendroidInitialize {
         }
     }
 
+    public static void SelectAdsWortise(Activity activity, String selectAdsBackup, String idInitialize, String idInitializeBackupAds) {
+
+    }
+
 }

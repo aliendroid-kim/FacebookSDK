@@ -297,4 +297,10 @@ public class AliendroidReward {
         }
         LoadRewardAlienMediation(activity, selecBackuptAds, idReward, idBackupReward);
     }
+    public static void ShowRewardWortise(Activity activity, String selecBackuptAds, String idReward, String idBackupReward) {
+
+    }
+    public static void LoadRewardWortise(Activity activity, String selectBackupAds, String idReward, String idBackupReward) {
+
+    }
 }

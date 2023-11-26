@@ -26,12 +26,15 @@ import com.aliendroid.sdkads.type.mediation.AlienMediationAds;
 import com.aliendroid.sdkads.type.view.AlienViewAds;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.props.adsmanager.PropsAdsManagement;
+
+import java.util.UUID;
 
 
 public class AliendroidBanner {
@@ -149,5 +152,24 @@ public class AliendroidBanner {
         });
     }
 
+    public static void SmallCollapsibleAdmobTop(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup, String Hpk1,
+                                                String Hpk2, String Hpk3, String Hpk4, String Hpk5) {
 
+    }
+
+    public static void SmallCollapsibleAdmobBottom(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup, String Hpk1,
+                                                   String Hpk2, String Hpk3, String Hpk4, String Hpk5) {
+
+    }
+    public static void SmallBannerWortise(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup) {
+
+    }
+
+    public static void LoadIntertitialWortise(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup) {
+
+    }
+    public static void ShowIntertitialWortise(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup,
+                                              int interval) {
+
+    }
 }
