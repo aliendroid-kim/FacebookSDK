@@ -18,7 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.appopen.AppOpenAd;
-import com.props.adsmanager.PropsAdsManagement;
+
 
 import java.util.Date;
 
@@ -40,7 +40,7 @@ public class PropsOpenAds implements LifecycleObserver, Application.ActivityLife
         LOADADS = loadads;
         try {
             if (LOADADS) {
-                IDOPEN = PropsAdsManagement.getOpenAppAdsId(idOpenAds);
+                IDOPEN = "";
             } else {
                 IDOPEN = "";
             }
@@ -56,7 +56,7 @@ public class PropsOpenAds implements LifecycleObserver, Application.ActivityLife
         SELECT_ADS = selectADS;
         try {
             if (LOADADS) {
-                IDOPEN = PropsAdsManagement.getOpenAppAdsId(idOpenAds);
+                IDOPEN = "";
             } else {
                 IDOPEN = "";
             }

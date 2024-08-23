@@ -32,7 +32,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
-import com.props.adsmanager.PropsAdsManagement;
+
 
 import java.util.UUID;
 
@@ -67,13 +67,6 @@ public class AliendroidBanner {
             public void onError(Ad ad, AdError adError) {
                 if (onLoadBannerFacebook!=null){
                     onLoadBannerFacebook.onError();
-                }
-                if (selectAdsBackup.equals("ALIEN-M")){
-                    PropsAdsManagement propsAds = new PropsAdsManagement(activity);
-                    AdView adView = propsAds.createBannerAdview("BANNER", idBannerBackup);
-                    AdRequest adRequest2 = new AdRequest.Builder().build();
-                    layAds.addView(adView);
-                    adView.loadAd(adRequest2);
                 }
             }
 
@@ -133,23 +126,6 @@ public class AliendroidBanner {
     }
 
     public static void SmallBannerAlienMediation(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup) {
-        PropsAdsManagement propsAds = new PropsAdsManagement(activity);
-        AdView adView = propsAds.createBannerAdview("BANNER", idBanner);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        layAds.addView(adView);
-        adView.loadAd(adRequest);
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                if (selectAdsBackup.equals("FACEBOOK")){
-                    adViewFAN = new com.facebook.ads.AdView(activity, idBannerBackup,
-                            com.facebook.ads.AdSize.BANNER_HEIGHT_50);
-                    layAds.addView(adViewFAN);
-                    adViewFAN.loadAd(adViewFAN.buildLoadAdConfig().build());
-                }
-                super.onAdFailedToLoad(loadAdError);
-            }
-        });
     }
 
     public static void SmallCollapsibleAdmobTop(Activity activity, RelativeLayout layAds, String selectAdsBackup, String idBanner, String idBannerBackup, String Hpk1,

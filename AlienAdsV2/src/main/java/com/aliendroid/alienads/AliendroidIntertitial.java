@@ -28,15 +28,9 @@ import com.aliendroid.alienads.interfaces.interstitial.show.OnShowInterstitialFa
 import com.aliendroid.alienads.interfaces.interstitial.show.OnShowInterstitialGoogle;
 import com.aliendroid.alienads.interfaces.interstitial.show.OnShowInterstitialIronSource;
 import com.aliendroid.alienads.interfaces.interstitial.show.OnShowInterstitialStartApp;
-import com.aliendroid.sdkads.interfaces.OnLoadInterstitialMediation;
-import com.aliendroid.sdkads.interfaces.OnLoadInterstitialView;
-import com.aliendroid.sdkads.interfaces.OnShowInterstitial;
-import com.aliendroid.sdkads.interfaces.OnShowInterstitialView;
 import com.aliendroid.sdkads.type.mediation.AlienMediationAds;
-import com.aliendroid.sdkads.type.view.AlienViewAds;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAdListener;
-import com.props.adsmanager.PropsAdsManagement;
 
 
 public class AliendroidIntertitial {
@@ -215,14 +209,9 @@ public class AliendroidIntertitial {
                                           int interval) {
         if (counter >= interval) {
             if (FBinterstitialAd == null || !FBinterstitialAd.isAdLoaded()) {
-                if (PropsAdsManagement.getInterstitialAds() != null) {
-                    PropsAdsManagement.getInterstitialAds().show(activity);
-                }
-
                 if (onShowInterstitialFacebook != null) {
                     onShowInterstitialFacebook.onAdFailedShow();
                 }
-
             } else {
                 FBinterstitialAd.show();
                 if (onShowInterstitialFacebook != null) {
@@ -247,20 +236,6 @@ public class AliendroidIntertitial {
 
     public static void ShowIntertitialAlienMediation(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup,
                                                      int interval) {
-        if (counter >= interval) {
-            if (PropsAdsManagement.getInterstitialAds() != null) {
-                PropsAdsManagement.getInterstitialAds().show(activity);
-            } else {
-                if (FBinterstitialAd == null || !FBinterstitialAd.isAdLoaded()) {
-                } else {
-                    FBinterstitialAd.show();
-                }
-            }
-            LoadIntertitialAlienMediation(activity, selectAdsBackup, idIntertitial, idIntertitialBackup);
-            counter = 0;
-        } else {
-            counter++;
-        }
     }
     public static void LoadIntertitialWortise(Activity activity, String selectAdsBackup, String idIntertitial, String idIntertitialBackup) {
 

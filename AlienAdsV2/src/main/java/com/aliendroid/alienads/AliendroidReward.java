@@ -21,23 +21,14 @@ import com.aliendroid.alienads.interfaces.rewards.show.OnShowRewardsAlienView;
 import com.aliendroid.alienads.interfaces.rewards.show.OnShowRewardsApplovinDiscovery;
 import com.aliendroid.alienads.interfaces.rewards.show.OnShowRewardsGoogle;
 import com.aliendroid.sdkads.interfaces.OnLoadRewardsMediation;
-import com.aliendroid.sdkads.interfaces.OnLoadRewardsView;
-import com.aliendroid.sdkads.interfaces.OnShowInterstitialView;
-import com.aliendroid.sdkads.interfaces.OnShowRewards;
-import com.aliendroid.sdkads.interfaces.OnShowRewardsView;
-import com.aliendroid.sdkads.type.mediation.AlienMediationAds;
-import com.aliendroid.sdkads.type.view.AlienViewAds;
 import com.facebook.ads.Ad;
 import com.facebook.ads.RewardedVideoAd;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
-import com.props.adsmanager.PropsAdsManagement;
 
-import java.util.Map;
 
 public class AliendroidReward {
     public static RewardedVideoAd rewardedVideoAdFan;
@@ -125,7 +116,6 @@ public class AliendroidReward {
 
     public static void LoadRewardFan(Activity activity, String selectBackupAds, String idReward, String idBackupReward) {
         try {
-
             rewardedVideoAdFan = new RewardedVideoAd(activity, idReward);
             com.facebook.ads.RewardedVideoAdListener rewardedVideoAdListener = new com.facebook.ads.RewardedVideoAdListener() {
 
@@ -169,20 +159,6 @@ public class AliendroidReward {
                     rewardedVideoAdFan.buildLoadAdConfig()
                             .withAdListener(rewardedVideoAdListener)
                             .build());
-
-            if (selectBackupAds.equals("ALIEN-M")) {
-                PropsAdsManagement.loadRewardedAds(activity, idBackupReward, new RewardedAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
-                        Log.i(TAG, "testing rewarded");
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                    }
-                });
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,16 +167,6 @@ public class AliendroidReward {
     public static void ShowRewardFan(Activity activity, String selecBackuptAds, String idReward, String idBackupReward) {
         try {
             if (rewardedVideoAdFan == null || !rewardedVideoAdFan.isAdLoaded()) {
-                if (selecBackuptAds.equals("ALIEN-M")) {
-                    if (PropsAdsManagement.getRewardedAds() != null) {
-                        PropsAdsManagement.triggerRewardedAds(activity, new OnUserEarnedRewardListener() {
-                            @Override
-                            public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                                unlockreward = true;
-                            }
-                        });
-                    }
-                }
             } else {
                 rewardedVideoAdFan.show();
             }
@@ -212,17 +178,6 @@ public class AliendroidReward {
     }
     public static void LoadRewardAlienMediation(Activity activity, String selectBackupAds, String idReward, String idBackupReward) {
         try {
-            PropsAdsManagement.loadRewardedAds(activity, idReward, new RewardedAdLoadCallback() {
-                @Override
-                public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
-                    Log.i(TAG, "testing rewarded");
-                }
-
-                @Override
-                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                    // Handle the error
-                }
-            });
             switch (selectBackupAds) {
                 case "FACEBOOK":
                     rewardedVideoAdFan = new RewardedVideoAd(activity, idBackupReward);
@@ -277,24 +232,6 @@ public class AliendroidReward {
 
     }
     public static void ShowRewardAlienMediation(Activity activity, String selecBackuptAds, String idReward, String idBackupReward) {
-        try {
-            if (PropsAdsManagement.getRewardedAds() != null) {
-                PropsAdsManagement.triggerRewardedAds(activity, new OnUserEarnedRewardListener() {
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        unlockreward = true;
-                    }
-                });
-            } else {
-                if (selecBackuptAds.equals("FACEBOOK")) {
-                    if (rewardedVideoAdFan.isAdLoaded()) {
-                        rewardedVideoAdFan.show();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         LoadRewardAlienMediation(activity, selecBackuptAds, idReward, idBackupReward);
     }
     public static void ShowRewardWortise(Activity activity, String selecBackuptAds, String idReward, String idBackupReward) {

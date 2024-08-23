@@ -45,7 +45,7 @@ import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
-import com.props.adsmanager.PropsAdsManagement;
+
 
 
 import java.util.ArrayList;
@@ -95,43 +95,6 @@ public class AliendroidNative {
             public void onError(Ad ad, AdError adError) {
                 if (onLoadSmallNativesFacebook !=null){
                     onLoadSmallNativesFacebook.onError("");
-                }
-                if (selectAdsBackup.equals("ALIEN-M")){
-                    String getNativeId = PropsAdsManagement.getNativeAdsId(idNativeBackup);
-                    AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-                    builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                            if (nativeAd != null) {
-                                nativeAd.destroy();
-                            }
-                            nativeAd = nativeAds;
-                            NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                                    .inflate(R.layout.admob_small_native, null);
-                            populateNativeAdView(nativeAds, adView);
-                            layNative.removeAllViews();
-                            layNative.addView(adView);
-                        }
-                    });
-                    VideoOptions videoOptions2 = new VideoOptions.Builder()
-                            .build();
-                    NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                            .setVideoOptions(videoOptions2)
-                            .build();
-                    builder3.withNativeAdOptions(adOptions2);
-                    AdRequest request2 = new AdRequest.Builder()
-                            .build();
-                    AdLoader adLoader2 =
-                            builder3
-                                    .withAdListener(
-                                            new AdListener() {
-                                                @Override
-                                                public void onAdFailedToLoad(LoadAdError loadAdError) {
-
-                                                }
-                                            })
-                                    .build();
-                    adLoader2.loadAd(request2);
                 }
             }
 
@@ -194,42 +157,6 @@ public class AliendroidNative {
                 if (onLoadMediumNativesFacebook!=null){
                     onLoadMediumNativesFacebook.onError("");
                 }
-                if (selectAdsBackup.equals("ALIEN-M")){
-                    String getNativeId = PropsAdsManagement.getNativeAdsId(idNativeBackup);
-                    AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-                    builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                            if (nativeAd != null) {
-                                nativeAd.destroy();
-                            }
-                            nativeAd = nativeAds;
-                            NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                                    .inflate(R.layout.admob_big_native, null);
-                            populateNativeAdView(nativeAds, adView);
-                            layNative.removeAllViews();
-                            layNative.addView(adView);
-                        }
-                    });
-                    VideoOptions videoOptions2 = new VideoOptions.Builder()
-                            .build();
-                    NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                            .setVideoOptions(videoOptions2)
-                            .build();
-                    builder3.withNativeAdOptions(adOptions2);
-                    AdRequest request2 = new AdRequest.Builder()
-                            .build();
-                    AdLoader adLoader2 =
-                            builder3
-                                    .withAdListener(
-                                            new AdListener() {
-                                                @Override
-                                                public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                                }
-                                            })
-                                    .build();
-                    adLoader2.loadAd(request2);
-                }
             }
 
             @Override
@@ -262,163 +189,9 @@ public class AliendroidNative {
     }
 
     public static void MediumNativeAlien(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
-        String getNativeId = PropsAdsManagement.getNativeAdsId(nativeId);
-        AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-        builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-            @Override
-            public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                if (nativeAd != null) {
-                    nativeAd.destroy();
-                }
-                nativeAd = nativeAds;
-                NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                        .inflate(R.layout.admob_big_native, null);
-                populateNativeAdView(nativeAds, adView);
-                layNative.removeAllViews();
-                layNative.addView(adView);
-            }
-        });
-        VideoOptions videoOptions2 = new VideoOptions.Builder()
-                .build();
-        NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                .setVideoOptions(videoOptions2)
-                .build();
-        builder3.withNativeAdOptions(adOptions2);
-        AdRequest request2 = new AdRequest.Builder()
-                .build();
-        AdLoader adLoader2 =
-                builder3
-                        .withAdListener(
-                                new AdListener() {
-                                    @Override
-                                    public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                        if (selectAdsBackup.equals("FACEBOOK")) {
-                                            nativeAdfan = new com.facebook.ads.NativeAd(activity, nativeId);
-                                            NativeAdListener nativeAdListener = new NativeAdListener() {
-                                                @Override
-                                                public void onMediaDownloaded(Ad ad) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onMediaDownloaded();
-                                                    }
-                                                }
 
-                                                @Override
-                                                public void onError(Ad ad, AdError adError) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onError("");
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onAdLoaded(Ad ad) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onAdLoaded();
-                                                    }
-                                                    if (nativeAdfan == null || nativeAdfan != ad) {
-                                                        return;
-                                                    }
-                                                    inflateAd2(nativeAdfan, activity, layNative);
-                                                }
-
-                                                @Override
-                                                public void onAdClicked(Ad ad) {
-
-                                                }
-
-                                                @Override
-                                                public void onLoggingImpression(Ad ad) {
-
-                                                }
-                                            };
-
-                                            nativeAdfan.loadAd(
-                                                    nativeAdfan.buildLoadAdConfig()
-                                                            .withAdListener(nativeAdListener)
-                                                            .build());
-                                        }
-                                    }
-                                })
-                        .build();
-        adLoader2.loadAd(request2);
     }
     public static void SmallNativeAlien(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
-        String getNativeId = PropsAdsManagement.getNativeAdsId(nativeId);
-        AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-        builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-            @Override
-            public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                if (nativeAd != null) {
-                    nativeAd.destroy();
-                }
-                nativeAd = nativeAds;
-                NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                        .inflate(R.layout.admob_small_rectangle_native, null);
-                populateNativeAdView(nativeAds, adView);
-                layNative.removeAllViews();
-                layNative.addView(adView);
-            }
-        });
-        VideoOptions videoOptions2 = new VideoOptions.Builder()
-                .build();
-        NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                .setVideoOptions(videoOptions2)
-                .build();
-        builder3.withNativeAdOptions(adOptions2);
-        AdRequest request2 = new AdRequest.Builder()
-                .build();
-        AdLoader adLoader2 =
-                builder3
-                        .withAdListener(
-                                new AdListener() {
-                                    @Override
-                                    public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                        if (selectAdsBackup.equals("FACEBOOK")) {
-                                            nativeBannerAd = new NativeBannerAd(activity, nativeId);
-                                            NativeAdListener nativeAdListener = new NativeAdListener() {
-                                                @Override
-                                                public void onMediaDownloaded(Ad ad) {
-                                                    if (onLoadSmallNativesFacebook !=null){
-                                                        onLoadSmallNativesFacebook.onMediaDownloaded();
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onError(Ad ad, AdError adError) {
-                                                    if (onLoadSmallNativesFacebook !=null){
-                                                        onLoadSmallNativesFacebook.onError("");
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onAdLoaded(Ad ad) {
-                                                    if (onLoadSmallNativesFacebook !=null){
-                                                        onLoadSmallNativesFacebook.onAdLoaded();
-                                                    }
-                                                    if (nativeBannerAd == null || nativeBannerAd != ad) {
-                                                        return;
-                                                    }
-                                                    inflateAd(nativeBannerAd, activity, layNative);
-                                                }
-
-                                                @Override
-                                                public void onAdClicked(Ad ad) {
-
-                                                }
-
-                                                @Override
-                                                public void onLoggingImpression(Ad ad) {
-
-                                                }
-                                            };
-                                            nativeBannerAd.loadAd(
-                                                    nativeBannerAd.buildLoadAdConfig()
-                                                            .withAdListener(nativeAdListener)
-                                                            .build());
-                                        }
-                                    }
-                                })
-                        .build();
-        adLoader2.loadAd(request2);
     }
 
     public static void SmallNativeAdmobRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup, String Hpk1,
@@ -447,42 +220,6 @@ public class AliendroidNative {
             public void onError(Ad ad, AdError adError) {
                 if (onLoadMediumNativesFacebook!=null){
                     onLoadMediumNativesFacebook.onError("");
-                }
-                if (selectAdsBackup.equals("ALIEN-M")){
-                    String getNativeId = PropsAdsManagement.getNativeAdsId(idNativeBackup);
-                    AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-                    builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                            if (nativeAd != null) {
-                                nativeAd.destroy();
-                            }
-                            nativeAd = nativeAds;
-                            NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                                    .inflate(R.layout.admob_small_rectangle_native, null);
-                            populateNativeAdView(nativeAds, adView);
-                            layNative.removeAllViews();
-                            layNative.addView(adView);
-                        }
-                    });
-                    VideoOptions videoOptions2 = new VideoOptions.Builder()
-                            .build();
-                    NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                            .setVideoOptions(videoOptions2)
-                            .build();
-                    builder3.withNativeAdOptions(adOptions2);
-                    AdRequest request2 = new AdRequest.Builder()
-                            .build();
-                    AdLoader adLoader2 =
-                            builder3
-                                    .withAdListener(
-                                            new AdListener() {
-                                                @Override
-                                                public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                                }
-                                            })
-                                    .build();
-                    adLoader2.loadAd(request2);
                 }
             }
 
@@ -516,86 +253,6 @@ public class AliendroidNative {
 
 
     public static void SmallNativeAlienRectangle(Activity activity, RelativeLayout layNative, String selectAdsBackup, String nativeId, String idNativeBackup) {
-
-        String getNativeId = PropsAdsManagement.getNativeAdsId(nativeId);
-        AdLoader.Builder builder3 = new AdLoader.Builder(activity, getNativeId);
-        builder3.forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-            @Override
-            public void onNativeAdLoaded(@NonNull NativeAd nativeAds) {
-                if (nativeAd != null) {
-                    nativeAd.destroy();
-                }
-                nativeAd = nativeAds;
-                NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                        .inflate(R.layout.admob_small_rectangle_native, null);
-                populateNativeAdView(nativeAds, adView);
-                layNative.removeAllViews();
-                layNative.addView(adView);
-            }
-        });
-        VideoOptions videoOptions2 = new VideoOptions.Builder()
-                .build();
-        NativeAdOptions adOptions2 = new NativeAdOptions.Builder()
-                .setVideoOptions(videoOptions2)
-                .build();
-        builder3.withNativeAdOptions(adOptions2);
-        AdRequest request2 = new AdRequest.Builder()
-                .build();
-        AdLoader adLoader2 =
-                builder3
-                        .withAdListener(
-                                new AdListener() {
-                                    @Override
-                                    public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                        if (selectAdsBackup.equals("FACEBOOK")) {
-                                            nativeAdfan = new com.facebook.ads.NativeAd(activity, nativeId);
-                                            NativeAdListener nativeAdListener = new NativeAdListener() {
-                                                @Override
-                                                public void onMediaDownloaded(Ad ad) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onMediaDownloaded();
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onError(Ad ad, AdError adError) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onError("");
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onAdLoaded(Ad ad) {
-                                                    if (onLoadMediumNativesFacebook!=null){
-                                                        onLoadMediumNativesFacebook.onAdLoaded();
-                                                    }
-                                                    if (nativeAdfan == null || nativeAdfan != ad) {
-                                                        return;
-                                                    }
-                                                    inflateAd3(nativeAdfan, activity, layNative);
-                                                }
-
-                                                @Override
-                                                public void onAdClicked(Ad ad) {
-
-                                                }
-
-                                                @Override
-                                                public void onLoggingImpression(Ad ad) {
-
-                                                }
-                                            };
-
-                                            nativeAdfan.loadAd(
-                                                    nativeAdfan.buildLoadAdConfig()
-                                                            .withAdListener(nativeAdListener)
-                                                            .build());
-                                        }
-                                    }
-                                })
-                        .build();
-        adLoader2.loadAd(request2);
-
     }
 
     //Rectangle

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         AliendroidInitialize.SelectAdsFAN(this,Select_Backup_Ads,Backup_Initialize);
         AlienGDPR.loadGdpr(this,Select_Main_Ads,true);
         AliendroidIntertitial.LoadIntertitialFAN(MainActivity.this,Select_Backup_Ads,MainIntertitial,BackupIntertitial);
+        AliendroidReward.LoadRewardFan(MainActivity.this,Select_Backup_Ads,MainRewards,BackupReward);
 
     }
 
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void REWARD(View view){
-
+        AliendroidReward.ShowRewardFan(MainActivity.this,Select_Backup_Ads,MainIntertitial,BackupIntertitial);
     }
 
     public void onBackPressed(){

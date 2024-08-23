@@ -3,10 +3,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdk 34
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -32,9 +32,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation 'com.facebook.android:audience-network-sdk:6.16.0'
-    implementation 'com.google.android.gms:play-services-ads:22.5.0'
-    implementation 'com.github.ronaldwm2:alienads_propssdk:1.0.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.17.0'
+    implementation 'com.google.android.gms:play-services-ads:23.3.0'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
