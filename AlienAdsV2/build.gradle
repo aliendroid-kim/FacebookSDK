@@ -22,7 +22,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    namespace "com.aliendroid.alienads"
 
 }
 
@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation 'com.facebook.android:audience-network-sdk:6.17.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.20.0'
     implementation 'com.google.android.gms:play-services-ads:23.3.0'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'

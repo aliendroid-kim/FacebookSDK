@@ -1,6 +1,6 @@
 package com.aliendroid.alienads.config;
 
-import static com.aliendroid.alienads.BuildConfig.DEBUG;
+
 
 import android.content.Context;
 import android.util.Log;
@@ -24,9 +24,7 @@ public class AudienceNetworkInitializeHelper
      */
     static void initialize(Context context) {
         if (!AudienceNetworkAds.isInitialized(context)) {
-            if (DEBUG) {
-                AdSettings.turnOnSDKDebugger(context);
-            }
+
 
             AudienceNetworkAds
                     .buildInitSettings(context)

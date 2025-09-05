@@ -44,10 +44,6 @@ public class AliendroidInitialize {
 
     public static void SelectAdsFAN(Activity activity, String selectAdsBackup, String idInitializeBackupAds) {
         if (!AudienceNetworkAds.isInitialized(activity)) {
-            if (BuildConfig.DEBUG) {
-                AdSettings.turnOnSDKDebugger(activity);
-                AdSettings.setTestMode(true);
-            }
 
             AudienceNetworkAds
                     .buildInitSettings(activity)
@@ -62,10 +58,6 @@ public class AliendroidInitialize {
     public static void SelectAdsAlienMediation(Activity activity, String selectAdsBackup,String idInitialize, String idInitializeBackupAds) {
         if (selectAdsBackup.equals("FACEBOOK")){
             if (!AudienceNetworkAds.isInitialized(activity)) {
-                if (BuildConfig.DEBUG) {
-                    AdSettings.turnOnSDKDebugger(activity);
-                    AdSettings.setTestMode(true);
-                }
 
                 AudienceNetworkAds
                         .buildInitSettings(activity)
